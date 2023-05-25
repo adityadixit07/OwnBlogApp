@@ -17,14 +17,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 6,
   },
-//there are many  blog post for the single user that's why I decalared blogs type as array
-  blogs: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Blog",
-      required: true,
-    },
-  ],
+  //there are many  blog post for the single user that's why I decalared blogs type as array
+  blogs: [{ 
+    type: mongoose.Types.ObjectId,
+    ref: "Blog", 
+    required: true 
+  }],
 });
 
 export default mongoose.model("User", userSchema);

@@ -18,7 +18,7 @@ const blogSchema = new Schema({
   },
   user: {
     type: mongoose.Types.ObjectId, //for getting the blog by user id
-    ref:"User",
+    ref: "User",
     required: "true",
   },
 });
