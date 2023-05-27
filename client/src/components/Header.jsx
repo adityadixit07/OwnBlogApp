@@ -9,10 +9,13 @@ import Tab from "@mui/material/Tab";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CodeOffIcon from "@mui/icons-material/CodeOff";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../store";
+
 const Header = () => {
-  const [Value, setValue] = useState();
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const [Value, setValue] = useState();
   return (
     <AppBar position="sticky">
       <Toolbar sx={{ backgroundColor: "#ffffff" }}>
@@ -29,6 +32,7 @@ const Header = () => {
             <Tabs value={Value} onChange={(e, val) => setValue(val)}>
               <Tab LinkComponent={Link} to="/blogs" label="All Blogs" />
               <Tab LinkComponent={Link} to="/myblogs" label="My Blogs" />
+              <Tab LinkComponent={Link} to="/blogs/add" label="Add Blog" />
             </Tabs>
           </Box>
         )}
@@ -48,7 +52,6 @@ const Header = () => {
                 LinkComponent={Link}
                 to="/auth"
                 variant="contained"
-    
                 sx={{ margin: 2, borderRadius: 10, fontSize: "0.9rem" }}
                 color="warning"
               >
@@ -58,6 +61,7 @@ const Header = () => {
           )}
           {isLoggedIn && (
             <Button
+              onClick={() => dispatch(authActions.logout())}
               LinkComponent={Link}
               to="/auth"
               variant="contained"
