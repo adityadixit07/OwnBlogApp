@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Blog from './Blog';
 
-const Blog = () => {
+const Blogs = () => {
   const [Blogs,setBlogs]=useState();
   const sendRequest=async ()=>{
     const res=axios.get("http://localhost:5000/api/blog").catch((err)=>console.log(err))
@@ -13,9 +14,19 @@ const Blog = () => {
   },[])
   return (
     <div>
-      <h1>This is a blog page.</h1>
+    {
+      Blogs && Blogs.map((blog,index)=>{
+       <Blog id={blog._id}
+        isUser={localStorage.getItem("userId")===blog.user._id}
+        title={blog.title}
+        description={blog.description}
+        imageURL={blog.image}
+        userName={blog.user.name}
+        />
+      })
+    }
     </div>
   )
 }
 
-export default Blog
+export default Blogs;
